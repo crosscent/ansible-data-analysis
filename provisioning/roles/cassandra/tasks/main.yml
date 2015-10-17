@@ -1,0 +1,52 @@
+---
+
+- name: add repo for java 7
+  apt_repository: repo="ppa:webupd8team/java" state=present
+
+- name: Automatically select the Oracle License
+  shell: echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
+
+- name: install jre-7
+  apt: name=oracle-java7-installer update-cache=yes force=yes state=present update_cache=yes
+
+- name: add cassandra debian repository
+  apt_repository: repo='deb http://www.apache.org/dist/cassandra/debian 21x main' state=present
+
+- name: add first key for the cassandra debian repo
+  apt_key: keyserver=pgp.mit.edu id=F758CE318D77295D
+
+- name: add second key for cassandra
+  apt_key: keyserver=pgp.mit.edu id=2B5C1B00
+
+- name: add third key for cassandra
+  apt_key: keyserver=pgp.mit.edu id=0353B12C
+
+- name: install cassandra
+  apt: name=cassandra state=present update_cache=yes
+
+- name: copy cassandra config file
+  template: src=cassandra.yaml dest=/etc/cassandra
+
+- name: restart cassandra
+  service: name=cassandra state=restarted
+
+- name: add datastax debian repository
+  apt_repository: repo='deb http://debian.datastax.com/community stable main' state=present
+
+- name: add key for datastax debian repo
+  apt_key: url=http://debian.datastax.com/debian/repo_key state=present
+
+- name: install ops center
+  apt: name=opscenter state=present update_cache=yes
+
+- name: start opscenter
+  service: name=opscenterd state=started
+
+- name: install datastax agent
+  apt: name=datastax-agent state=present update_cache=yes
+
+- name: copy datastax agent config
+  template: src=address.yaml dest=/var/lib/datastax-agent/conf
+
+- name: restart opscenter
+  service: name=opscenterd state=restarted

@@ -1,0 +1,10 @@
+---
+
+- name: install nginx
+  apt: pkg=nginx state=installed update-cache=yes
+
+- name: create virtualenv
+  command: virtualenv env chdir={{document_root}} creates={{document_root}}/env
+
+- name: install requirements
+  command: env/bin/pip install -r requirements.txt chdir={{document_root}}

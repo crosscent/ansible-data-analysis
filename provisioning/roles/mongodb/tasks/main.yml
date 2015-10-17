@@ -1,0 +1,10 @@
+---
+
+- name: add key for MongoDB repo
+  apt_key: keyserver=hkp://keyserver.ubuntu.com:80 id=7F0CEB10
+
+- name: add MongoDB repo
+  apt_repository: repo='deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' state=present
+
+- name: install MongoDB
+  apt: name=mongodb-org state=present update_cache=yes

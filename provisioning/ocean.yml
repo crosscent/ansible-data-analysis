@@ -1,0 +1,14 @@
+---
+- hosts: all
+  remote_user: root
+  sudo: yes
+
+  vars:
+    cluster_name: Cassandra Cluster
+    seeds: "159.203.6.46"
+    document_root: /var/www/api.senseforage.com
+
+  roles:
+    - common
+    - cassandra
+    - web

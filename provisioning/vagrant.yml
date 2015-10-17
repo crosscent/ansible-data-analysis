@@ -1,0 +1,15 @@
+---
+- hosts: all
+  remote_user: vagrant
+  sudo: yes
+
+  vars:
+    document_root: /home/vagrant
+    cluster_name: Cassandra Cluster
+    seeds: "127.0.0.1"
+
+  roles:
+    - common
+    # - cassandra
+    - mongodb
+    - web
