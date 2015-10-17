@@ -1,10 +1,23 @@
 ---
 
+- name: install supervisor
+  apt: pkg=supervisor state=installed update-cache=yes
+  ignore_errors: yes
+
 - name: install nginx
   apt: pkg=nginx state=installed update-cache=yes
+
+- name: sync files to server
+  synchronize: src=../server/ dest={{document_root}}
 
 - name: create virtualenv
   command: virtualenv env chdir={{document_root}} creates={{document_root}}/env
 
 - name: install requirements
   command: env/bin/pip install -r requirements.txt chdir={{document_root}}
+
+- name: juptyer supervisor conf
+  template: src=etc/supervisor/conf.d/jupyter.conf dest=/etc/supervisor/conf.d/juptyer.conf
+  notify:
+    - reread supervisor
+    - update supervisor
