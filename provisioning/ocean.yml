@@ -5,10 +5,12 @@
 
   vars:
     cluster_name: Cassandra Cluster
-    seeds: "159.203.6.46"
+    seeds: "159.203.15.91"
     document_root: /var/www/api.senseforage.com
+    jupyter_root: /var/www/api.senseforage.com/jupyter
 
   roles:
     - common
-    - cassandra
+    # - cassandra
+    - mongodb
     - web

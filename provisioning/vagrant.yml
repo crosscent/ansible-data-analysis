@@ -5,6 +5,7 @@
 
   vars:
     document_root: /home/vagrant
+    jupyter_root: /home/vagrant/jupyter
     cluster_name: Cassandra Cluster
     seeds: "127.0.0.1"
 

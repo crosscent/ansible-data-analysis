@@ -10,6 +10,9 @@
 - name: sync files to server
   synchronize: src=../server/ dest={{document_root}}
 
+- name: create jupyter directory
+  file: path={{jupyter_root}} state=directory
+
 - name: create virtualenv
   command: virtualenv env chdir={{document_root}} creates={{document_root}}/env
 
