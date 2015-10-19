@@ -1,0 +1,2 @@
+- name: install GEOS
+  apt: pkg=libgeos-dev state=installed update-cache=yes

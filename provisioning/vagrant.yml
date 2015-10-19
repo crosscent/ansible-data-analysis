@@ -13,4 +13,5 @@
     - common
     # - cassandra
     - mongodb
+    - analytical
     - web
