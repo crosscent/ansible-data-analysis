@@ -1,2 +1,5 @@
 - name: install GEOS
   apt: pkg=libgeos-dev state=installed update-cache=yes
+
+- name: install packages required by matplotlib
+  apt: pkg=python-matplotlib state=build-dep update-cache=yes
