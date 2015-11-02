@@ -3,3 +3,10 @@
 
 - name: install packages required by matplotlib
   apt: pkg=python-matplotlib state=build-dep update-cache=yes
+
+- name: install packages required by scipy
+  apt: pkg={{item}} state=installed
+  with_items:
+    - libblas-dev
+    - liblapack-dev
+    - gfortran
